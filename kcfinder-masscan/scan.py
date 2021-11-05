@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import certifi
 import urllib3
 import argparse
@@ -9,13 +8,6 @@ from urllib3.exceptions import MaxRetryError
 
 from urllib3.util.timeout import Timeout
 
-=======
-import colorama
-import requests
-import argparse
-import time
-from colorama import Fore
->>>>>>> acd1f3f6e8434ea12d131f0ef473625826ffc377
 b = '\033[34;1m'
 g = Fore.LIGHTGREEN_EX
 c = Fore.LIGHTCYAN_EX
@@ -40,10 +32,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-u', '--url', help='Put URL')
 parser.add_argument('-l', '--list', help='File Contain URL')
 parser.add_argument('-s', '--save', help='If Result Wan\'t To Be Saved')
-<<<<<<< HEAD
-=======
-parser.add_argument('-t', '--TimeOut', help='time out - default: 5')
->>>>>>> acd1f3f6e8434ea12d131f0ef473625826ffc377
 parser.add_argument('-v', '--version', action='version', version='0.2.1')
 
 args = parser.parse_args()
@@ -56,7 +44,6 @@ def getUrl(url):
             urls.append(allurl[i].strip('\n'))
         return urls
 
-<<<<<<< HEAD
 def scan(url):
     try:
         http = urllib3.PoolManager(ca_certs=certifi.where())
@@ -104,45 +91,6 @@ def scan(url):
 
 
 
-=======
-def scan(url, timer=5):
-    target = url
-    #mengecek prokotol
-    target = target.replace('https://', '')
-    target = target.replace('http://', '')
-    tar_list = target.split('/')
-    for tar in tar_list:
-        if tar == '':
-            tar_list.remove(tar)
-    target = '/'.join(tar_list)
-    url = 'http://' + target
-    if args.TimeOut:
-        timer = args.TimeOut
-    wl = getUrl('list')
-    for i in wl:
-        www = url+i
-        try:
-          get = requests.get(url=www)
-        except:
-          www = 'https://'+target+i 
-          get = requests.get(www)
-        if get.status_code == 404:
-            pass
-        elif get.status_code == 302:
-            print(g+'[*] '+c+url+r+' ==> Redirected - '+www)
-        elif get.status_code == 200:
-            print(b+'[+] '+url+c+' ==> Found!! - '+www)
-            if args.save:
-                logger(pika=www, nma=args.save)
-            else:
-                pass
-        elif get.status_code == 403:
-            pass
-        elif get.status_code == 500:
-            pass
-        else:
-            print(b+'[+] '+w+url+r+' ==> Not Found')
->>>>>>> acd1f3f6e8434ea12d131f0ef473625826ffc377
 def logger(pika, nma):
     file = open(str(nma) + ".txt", "a")
     file.write(str(pika))
@@ -165,8 +113,4 @@ elif args.list:
     for link in urll:
             scan(link)
     stop = time.time()
-<<<<<<< HEAD
     print('Finished in {} second'.format(int(stop - start)))
-=======
-    print('Finished in {} second'.format(int(stop - start)))
->>>>>>> acd1f3f6e8434ea12d131f0ef473625826ffc377
