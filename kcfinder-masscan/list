@@ -163,4 +163,8 @@
 /assets/js/ckeditor12/kcfinder/upload.php
 /apps/kcfinder/upload.php
 /static/kcfinder/browse.php
+<<<<<<< HEAD
 /assets/js/plugins/f1nd3r-p1ug1n/browse.php
+=======
+/assets/js/plugins/f1nd3r-p1ug1n/browse.php
+>>>>>>> acd1f3f6e8434ea12d131f0ef473625826ffc377
