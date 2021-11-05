@@ -55,23 +55,28 @@ def scan(url, timer=5):
         timer = args.TimeOut
     wl = getUrl('list')
     for i in wl:
-        get = requests.get(url=url+i)
-    if get.status_code == 404:
-        print(b+'[+] '+w+url+r+' ==> Not Found')
-    elif get.status_code == 302:
-        print(g+'[*] '+c+url+r+' ==> Redirected')
-    elif get.status_code == 200:
-        print(b+'[+] '+w+url+c+' ==> Found!!')
-        if args.save:
-            logger(pika=url, nma=args.save)
-        else:
+        www = url+i
+        try:
+          get = requests.get(url=www)
+        except:
+          www = 'https://'+target+i 
+          get = requests.get(www)
+        if get.status_code == 404:
             pass
-    elif get.status_code == 403:
-        pass
-    elif get.status_code == 500:
-        print(b+'[+] '+w+url+r+' ==> Not Found')
-    else:
-        print(b+'[+] '+w+url+r+' ==> Not Found')
+        elif get.status_code == 302:
+            print(g+'[*] '+c+url+r+' ==> Redirected - '+www)
+        elif get.status_code == 200:
+            print(b+'[+] '+url+c+' ==> Found!! - '+www)
+            if args.save:
+                logger(pika=www, nma=args.save)
+            else:
+                pass
+        elif get.status_code == 403:
+            pass
+        elif get.status_code == 500:
+            pass
+        else:
+            print(b+'[+] '+w+url+r+' ==> Not Found')
 def logger(pika, nma):
     file = open(str(nma) + ".txt", "a")
     file.write(str(pika))
@@ -85,8 +90,6 @@ if args.url:
     print(w+"##########{}RESULT{}{}###########".format(b, c, w))
 
     scan(args.url)
-    if scan(args.url) == None:
-        print("Not found")
     stop = time.time()
     print('Finished in {} second'.format(int(stop - start)))
 elif args.list:
@@ -95,8 +98,5 @@ elif args.list:
     print(w+"##########{}RESULT{}{}###########".format(b, c, w))
     for link in urll:
             scan(link)
-            
-    if scan(link) == None:
-        print("Not found")
     stop = time.time()
     print('Finished in {} second'.format(int(stop - start)))
