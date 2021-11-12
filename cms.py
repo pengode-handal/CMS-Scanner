@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+#Buatan Babwa,  gpp mau di ganti, babwa kn baik xixixi
+#tapi lebih baik buat sendiri biar bisa puas
+
 from colorama import Fore
 import requests
 from requests.exceptions import ConnectionError
